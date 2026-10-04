@@ -2,8 +2,7 @@
 
 A minimalist, cinematic, high-end developer portfolio designed to showcase my projects, experience, and journey as a builder. Engineered with a focus on fluid animations, premium typography, and a modern dark-mode aesthetic.
 
-> **Explore the live build:** [abjoraj-biswas.github.io/abjoraj_biswas.portfolio](https://github.com/abjoraj-biswas/abjoraj_biswas.portfolio) *(Update with your live link once deployed)*
-
+> **Explore the live build:** https://abjoraj-biswas-portfolio.netlify.app/
 ---
 
 ## 🧠 Core Architecture & Features
@@ -88,9 +87,9 @@ Portfolio/
 
 ## 🌐 Contact & Social Links
 
-- **GitHub**: [github.com/abjoraj](https://github.com/abjoraj)
-- **LinkedIn**: *(Insert your LinkedIn Link)*
-- **Email**: *(Insert your Email Address)*
+- **GitHub**: [github.com/abjoraj-biswas](https://github.com/abjoraj-biswas)
+- **LinkedIn**: www.linkedin.com/in/abjoraj-biswas-53978037a
+- **Email**: abjoraj203@gmail.com
 
 ---
 
