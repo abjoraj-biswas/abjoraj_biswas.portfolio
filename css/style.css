@@ -799,8 +799,8 @@ footer {
 }
 
 @keyframes lineFlow {
-    0% { background-position: 0 -200%; }
-    100% { background-position: 0 200%; }
+    0% { background-position: 0 200%; }
+    100% { background-position: 0 -200%; }
 }
 
 .timeline-item-centered {
