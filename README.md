@@ -2,7 +2,7 @@
 
 A minimalist, cinematic, high-end developer portfolio designed to showcase my projects, experience, and journey as a builder. Engineered with a focus on fluid animations, premium typography, and a modern dark-mode aesthetic.
 
-> **Explore the live build:** https://abjoraj-biswas-portfolio.netlify.app/
+> **Explore the live build:** https://abjorajbiswasportfolio.vercel.app/
 ---
 
 ## 🧠 Core Architecture & Features
