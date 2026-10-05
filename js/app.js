@@ -350,19 +350,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. Adjust timeline central line height
     function updateTimelineLine() {
         const timeline = document.querySelector('.timeline-centered');
-        const lastDot = document.querySelector('.timeline-item-centered:last-child .timeline-dot-centered');
-        if (timeline && lastDot) {
-            const timelineRect = timeline.getBoundingClientRect();
-            const dotRect = lastDot.getBoundingClientRect();
-            // Distance from bottom of timeline to the center of the last dot
-            const bottomOffset = timelineRect.bottom - (dotRect.top + dotRect.height / 2) + 15;
-            timeline.style.setProperty('--line-bottom', `${bottomOffset}px`);
-
+        if (timeline) {
             // Progress bar distance (up to the active dot)
             const activeDot = document.querySelector('.timeline-dot-centered.active-dot');
             if (activeDot) {
-                const activeDotRect = activeDot.getBoundingClientRect();
-                const progressHeight = (activeDotRect.top + activeDotRect.height / 2) - timelineRect.top - 30;
+                const activeItem = activeDot.closest('.timeline-item-centered');
+                // Use offsetTop to avoid issues with CSS transforms, scroll positions, or Lenis smooth scroll
+                const dotCenterY = activeItem.offsetTop + activeDot.offsetTop + (activeDot.offsetHeight / 2);
+                const progressHeight = dotCenterY - 30; // Line starts at top: 30px
                 timeline.style.setProperty('--progress-height', `${progressHeight}px`);
             }
         }
