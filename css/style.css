@@ -828,7 +828,20 @@ footer {
 }
 
 .timeline-dot-centered.active-dot {
-    box-shadow: 0 0 15px var(--accent-glow);
+    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent-glow);
+    animation: timelineDotPulse 2s infinite;
+}
+
+@keyframes timelineDotPulse {
+    0% {
+        box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-glow);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent-glow);
+    }
+    100% {
+        box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-glow);
+    }
 }
 
 .timeline-dot-centered.end-dot {
