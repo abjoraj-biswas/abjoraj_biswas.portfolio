@@ -761,3 +761,256 @@ footer {
 .cursor-hover #cursor-dot {
     opacity: 0;
 }
+
+/* Centered Timeline (My Journey) */
+.timeline-centered {
+    position: relative;
+    max-width: 900px;
+    margin: 4rem auto 0;
+    padding: 0 20px;
+}
+
+/* Center Vertical Line */
+.timeline-centered::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline-item-centered {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    margin-bottom: 3rem;
+}
+
+.timeline-item-centered.left {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item-centered.right {
+    left: 50%;
+    text-align: left;
+}
+
+/* The dots on the line */
+.timeline-dot-centered {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    right: -7px;
+    background-color: var(--bg-main);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    top: 30px;
+    border-radius: 50%;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.timeline-item-centered.right .timeline-dot-centered {
+    left: -7px;
+}
+
+.timeline-dot-centered.active-dot {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.timeline-content-centered {
+    padding: 1.5rem 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    position: relative;
+    transition: all 0.3s ease;
+    display: inline-block;
+    width: 100%;
+}
+
+.timeline-content-centered.active-card {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.1), inset 0 0 20px rgba(56, 189, 248, 0.05);
+}
+
+/* Images and Icons */
+.timeline-image-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.timeline-item-centered.left .timeline-image-wrapper {
+    float: right;
+    margin-left: 1rem;
+}
+
+.timeline-item-centered.right .timeline-image-wrapper {
+    float: left;
+    margin-right: 1rem;
+}
+
+.timeline-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.card-icon {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-item-centered.left .card-icon {
+    text-align: right;
+}
+
+.timeline-date-centered {
+    display: block;
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content-centered h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content-centered p {
+    font-family: var(--font-typewriter);
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.timeline-content-centered p.desc {
+    margin-top: 0.5rem;
+}
+
+/* Active Card Specifics */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 20px;
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-family: monospace;
+    letter-spacing: 1px;
+    margin-top: 1.5rem;
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(56, 189, 248, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+
+.progress-bar-container {
+    margin-top: 1.5rem;
+}
+
+.progress-bar {
+    height: 4px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+.progress-text {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+.timeline-item-centered.left .progress-bar-container {
+    text-align: right;
+}
+.timeline-item-centered.left .progress-bar::after {
+    right: 0;
+    left: auto;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .timeline-centered::after {
+        left: 31px;
+    }
+    .timeline-item-centered {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item-centered.left, 
+    .timeline-item-centered.right {
+        left: 0;
+        text-align: left;
+    }
+    .timeline-dot-centered {
+        left: 24px !important;
+        right: auto !important;
+    }
+    .timeline-item-centered.left .timeline-image-wrapper {
+        float: left;
+        margin-left: 0;
+        margin-right: 1rem;
+    }
+    .timeline-item-centered.left .card-icon {
+        text-align: left;
+    }
+    .timeline-item-centered.left .progress-bar-container {
+        text-align: left;
+    }
+    .timeline-item-centered.left .progress-bar::after {
+        left: 0;
+        right: auto;
+    }
+}
