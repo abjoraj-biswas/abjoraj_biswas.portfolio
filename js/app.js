@@ -362,8 +362,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const activeDot = document.querySelector('.timeline-dot-centered.active-dot');
             if (activeDot) {
                 const activeDotRect = activeDot.getBoundingClientRect();
-                const progressBottomOffset = timelineRect.bottom - (activeDotRect.top + activeDotRect.height / 2);
-                timeline.style.setProperty('--progress-bottom', `${progressBottomOffset}px`);
+                const progressHeight = (activeDotRect.top + activeDotRect.height / 2) - timelineRect.top - 30;
+                timeline.style.setProperty('--progress-height', `${progressHeight}px`);
             }
         }
     }
