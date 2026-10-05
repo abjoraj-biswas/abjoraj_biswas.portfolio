@@ -828,19 +828,46 @@ footer {
 }
 
 .timeline-dot-centered.active-dot {
-    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent-glow);
-    animation: timelineDotPulse 2s infinite;
+    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+    animation: timelineDotBreathe 2s infinite ease-in-out;
 }
 
-@keyframes timelineDotPulse {
-    0% {
+.timeline-dot-centered.active-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: timelineDotRipple 2s infinite ease-out;
+    z-index: -1;
+}
+
+@keyframes timelineDotBreathe {
+    0%, 100% {
         box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-glow);
     }
     50% {
-        box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent-glow);
+        box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+    }
+}
+
+@keyframes timelineDotRipple {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        border-width: 2px;
     }
     100% {
-        box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-glow);
+        width: 400%;
+        height: 400%;
+        opacity: 0;
+        border-width: 0;
     }
 }
 
