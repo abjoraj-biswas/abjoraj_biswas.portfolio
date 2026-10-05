@@ -770,7 +770,20 @@ footer {
     padding: 0 20px;
 }
 
-/* Center Vertical Line */
+/* Center Vertical Line Background (Grey track) */
+.timeline-centered::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    top: 30px;
+    bottom: var(--line-bottom, 0px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+/* Fluid Progress Line (Blue animated) */
 .timeline-centered::after {
     content: '';
     position: absolute;
@@ -779,10 +792,10 @@ footer {
     background-size: 100% 200%;
     animation: lineFlow 3s linear infinite;
     top: 30px;
-    bottom: var(--line-bottom, 0px);
+    bottom: var(--progress-bottom, 0px);
     left: 50%;
     transform: translateX(-50%);
-    z-index: 0;
+    z-index: 1;
 }
 
 @keyframes lineFlow {
