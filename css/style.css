@@ -799,8 +799,8 @@ footer {
 }
 
 @keyframes lineFlow {
-    0% { background-position: 0 200%; }
-    100% { background-position: 0 -200%; }
+    0% { background-position: 0 -200%; }
+    100% { background-position: 0 200%; }
 }
 
 .timeline-item-centered {
@@ -1033,8 +1033,8 @@ footer {
 }
 
 @keyframes fluidFlow {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
 }
 
 .progress-text {
