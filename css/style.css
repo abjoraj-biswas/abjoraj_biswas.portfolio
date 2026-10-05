@@ -779,7 +779,7 @@ footer {
     background-size: 100% 200%;
     animation: lineFlow 3s linear infinite;
     top: 30px;
-    bottom: 0;
+    bottom: var(--line-bottom, 0px);
     left: 50%;
     transform: translateX(-50%);
 }

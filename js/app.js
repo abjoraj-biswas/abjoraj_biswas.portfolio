@@ -347,4 +347,21 @@ document.addEventListener('DOMContentLoaded', () => {
         initCanvas();
         drawCanvas();
     }
+    // 8. Adjust timeline central line height
+    function updateTimelineLine() {
+        const timeline = document.querySelector('.timeline-centered');
+        const lastDot = document.querySelector('.timeline-item-centered:last-child .timeline-dot-centered');
+        if (timeline && lastDot) {
+            const timelineRect = timeline.getBoundingClientRect();
+            const dotRect = lastDot.getBoundingClientRect();
+            // Distance from bottom of timeline to the center of the last dot
+            const bottomOffset = timelineRect.bottom - (dotRect.top + dotRect.height / 2);
+            timeline.style.setProperty('--line-bottom', `${bottomOffset}px`);
+        }
+    }
+    
+    // Use setTimeout to ensure DOM has fully painted
+    setTimeout(updateTimelineLine, 100);
+    window.addEventListener('load', updateTimelineLine);
+    window.addEventListener('resize', updateTimelineLine);
 });
