@@ -777,7 +777,7 @@ footer {
     width: 2px;
     background: rgba(255, 255, 255, 0.1);
     top: 30px;
-    height: var(--progress-height, 0px);
+    height: var(--total-height, 100%);
     left: 50%;
     transform: translateX(-50%);
     z-index: 0;

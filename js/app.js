@@ -360,6 +360,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const progressHeight = dotCenterY - 30; // Line starts at top: 30px
                 timeline.style.setProperty('--progress-height', `${progressHeight}px`);
             }
+
+            // Total timeline distance (up to the last dot)
+            const lastDot = document.querySelector('.timeline-item-centered:last-child .timeline-dot-centered');
+            if (lastDot) {
+                const lastItem = lastDot.closest('.timeline-item-centered');
+                const lastDotCenterY = lastItem.offsetTop + lastDot.offsetTop + (lastDot.offsetHeight / 2);
+                const totalHeight = lastDotCenterY - 30;
+                timeline.style.setProperty('--total-height', `${totalHeight}px`);
+            }
         }
     }
     
