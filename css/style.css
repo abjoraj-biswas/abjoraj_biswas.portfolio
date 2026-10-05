@@ -817,7 +817,6 @@ footer {
     right: -7px;
     background-color: var(--accent);
     border: 2px solid var(--accent);
-    box-shadow: 0 0 15px var(--accent-glow);
     top: 30px;
     border-radius: 50%;
     z-index: 2;
@@ -826,6 +825,10 @@ footer {
 
 .timeline-item-centered.right .timeline-dot-centered {
     left: -7px;
+}
+
+.timeline-dot-centered.active-dot {
+    box-shadow: 0 0 15px var(--accent-glow);
 }
 
 .timeline-dot-centered.end-dot {
