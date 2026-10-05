@@ -796,6 +796,7 @@ footer {
     background-color: inherit;
     width: 50%;
     margin-bottom: 3rem;
+    z-index: 2;
 }
 
 .timeline-item-centered.left {
@@ -814,7 +815,7 @@ footer {
     width: 14px;
     height: 14px;
     right: -7px;
-    background-color: var(--bg-color);
+    background-color: var(--accent);
     border: 2px solid rgba(255, 255, 255, 0.3);
     top: 30px;
     border-radius: 50%;
