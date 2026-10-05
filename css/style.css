@@ -833,6 +833,10 @@ footer {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
+.timeline-dot-centered.end-dot {
+    background-color: var(--bg-color);
+}
+
 .timeline-content-centered {
     padding: 1.5rem 2rem;
     background: var(--card-bg);
