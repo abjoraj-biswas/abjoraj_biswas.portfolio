@@ -360,7 +360,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Use setTimeout to ensure DOM has fully painted
+    // Use ResizeObserver to detect changes in container height (e.g. image loads)
+    const timeline = document.querySelector('.timeline-centered');
+    if (timeline) {
+        const resizeObserver = new ResizeObserver(() => {
+            updateTimelineLine();
+        });
+        resizeObserver.observe(timeline);
+    }
+
     setTimeout(updateTimelineLine, 100);
     window.addEventListener('load', updateTimelineLine);
     window.addEventListener('resize', updateTimelineLine);
