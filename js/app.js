@@ -354,8 +354,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (timeline && lastDot) {
             const timelineRect = timeline.getBoundingClientRect();
             const dotRect = lastDot.getBoundingClientRect();
-            // Distance from bottom of timeline to the center of the last dot
-            const bottomOffset = timelineRect.bottom - (dotRect.top + dotRect.height / 2);
+            // Distance from bottom of timeline to the center of the last dot (plus a bit extra to hide it behind the dot)
+            const bottomOffset = timelineRect.bottom - (dotRect.top + dotRect.height / 2) + 15;
             timeline.style.setProperty('--line-bottom', `${bottomOffset}px`);
         }
     }
