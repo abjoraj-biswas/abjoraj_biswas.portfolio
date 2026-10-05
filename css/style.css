@@ -770,6 +770,19 @@ footer {
     padding: 0 20px;
 }
 
+/* Center Vertical Line Background (Grey track) */
+.timeline-centered::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    top: 30px;
+    height: var(--progress-height, 0px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
 /* Fluid Progress Line (Blue animated) */
 .timeline-centered::after {
     content: '';
@@ -1041,7 +1054,8 @@ footer {
 
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
-    .timeline-centered::after {
+    .timeline-centered::after,
+    .timeline-centered::before {
         left: 31px;
     }
     .timeline-item-centered {
