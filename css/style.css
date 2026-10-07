@@ -51,12 +51,14 @@ body {
 body:not(.content-loaded) nav,
 body:not(.content-loaded) main,
 body:not(.content-loaded) footer,
-body:not(.content-loaded) .blob {
-    opacity: 0;
+body:not(.content-loaded) .blob,
+body:not(.content-loaded) #cursor-dot,
+body:not(.content-loaded) #cursor-ring {
+    opacity: 0 !important;
     pointer-events: none;
 }
 
-nav, main, footer, .blob {
+nav, main, footer, .blob, #cursor-dot, #cursor-ring {
     transition: opacity 1.5s ease-in-out;
 }
 
