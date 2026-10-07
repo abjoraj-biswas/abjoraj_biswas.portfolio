@@ -33,6 +33,15 @@ A minimalist, cinematic, high-end developer portfolio designed to showcase my pr
 ### 7. ⏳ Vertical Experience Timeline
 - **Elegant History**: A dedicated Experience & Education section mapped onto a vertical timeline with glowing nodes and glassmorphism detail cards that elevate on hover.
 
+### 8. 🎵 Live Spotify Vinyl Player (Vercel Serverless)
+- **Real-Time Now Playing**: A custom-built, floating vinyl record widget pinned to the bottom corner that fetches live Spotify playback data.
+- **Dynamic Spinning State**: The vinyl disc actively spins when a song is playing, and seamlessly pauses when paused or showing "Recently Played".
+- **Serverless Backend**: Powered by a Vercel Serverless Function (`/api/now-playing.js`) using the official Spotify Web API to securely handle OAuth tokens without exposing secrets.
+
+### 9. 🎬 Cinematic "Neural" Loading Screen
+- **State Machine Animation**: An intricate loading sequence where the custom cursor remains hidden, the background draws a matrix of dots, and smoothly morphs into connected neural lines upon completion.
+- **Fade-In Reveal**: Elements like the Spotify widget and content seamlessly fade into view after the initial background loading sequence completes.
+
 ---
 
 ## 🛠️ Technology Stack
@@ -44,6 +53,7 @@ A minimalist, cinematic, high-end developer portfolio designed to showcase my pr
 | **Animations** | Keyframe Animations, CSS Transitions |
 | **Scroll Engine** | Lenis.js (Smooth scrolling interpolation) |
 | **Dynamic Data** | GitHub REST API, HTML5 Canvas API |
+| **Backend & Cloud** | Vercel Serverless Functions (Node.js), Spotify API |
 
 ---
 
@@ -52,6 +62,8 @@ A minimalist, cinematic, high-end developer portfolio designed to showcase my pr
 ```
 Portfolio/
 ├── index.html          # Main HTML semantic structure & layout
+├── api/
+│   └── now-playing.js  # Vercel Serverless Function for Spotify integration
 ├── css/
 │   └── style.css       # Core styling, animations, and theme variables
 ├── js/
