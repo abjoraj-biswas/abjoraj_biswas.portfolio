@@ -91,6 +91,19 @@ body.loaded #plaid-loader {
     visibility: hidden;
 }
 
+/* Hide content initially to dissolve in later */
+body:not(.content-loaded) nav,
+body:not(.content-loaded) main,
+body:not(.content-loaded) footer,
+body:not(.content-loaded) .blob {
+    opacity: 0;
+    pointer-events: none;
+}
+
+nav, main, footer, .blob {
+    transition: opacity 1.5s ease-in-out;
+}
+
 a, button, input, textarea, .project-card, .btn {
     cursor: none;
 }

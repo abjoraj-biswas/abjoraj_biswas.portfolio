@@ -48,15 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 star.pz = star.z;
                 
-                // Color ranging between blue and purple
+                // Color ranging between blue and purple, turning white as speed drops
                 const dist = Math.sqrt(star.x*star.x + star.y*star.y);
                 let hue = (dist % 60) + 200; 
+                let sat = (speed / 25) * 100;
+                let light = 100 - ((speed / 25) * 30);
                 
                 pCtx.beginPath();
                 pCtx.moveTo(px, py);
                 pCtx.lineTo(sx, sy);
                 pCtx.lineWidth = (1000 - star.z) / 400; // Thinner lines
-                pCtx.strokeStyle = `hsl(${hue}, 100%, 70%)`;
+                pCtx.strokeStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
                 pCtx.stroke();
             }
             
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pHeight = plaidCanvas.height = window.innerHeight;
         });
         
-        // Sequence: Run fast -> decelerate to 0 -> dissolve
+        // Sequence: Run fast -> decelerate to 0 (turning white) -> dissolve -> show content
         setTimeout(() => {
             // Decelerate the speed over 1 second
             let slowDownInterval = setInterval(() => {
@@ -80,13 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 40);
 
-            // Once speed is 0 (after 1s), start dissolving to the home page
+            // Once speed is 0 (after 1s), start dissolving the loader to reveal the neural background
             setTimeout(() => {
                 document.body.classList.add('loaded');
                 document.body.style.overflow = '';
                 
-                // Remove DOM elements after transition finishes
+                // After the loader dissolves (1.5s), fade in the main content
                 setTimeout(() => {
+                    document.body.classList.add('content-loaded');
+                    
+                    // Cleanup
                     cancelAnimationFrame(plaidFrame);
                     const loader = document.getElementById('plaid-loader');
                     if (loader) loader.remove();
