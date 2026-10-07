@@ -510,4 +510,28 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(updateTimelineLine, 100);
     window.addEventListener('load', updateTimelineLine);
     window.addEventListener('resize', updateTimelineLine);
+
+    // 9. Spotify Recently Played Integration
+    async function updateSpotifyPlayer() {
+        const iframe = document.getElementById('spotify-iframe');
+        if (!iframe) return;
+        
+        try {
+            // NOTE: Replace this URL with your actual backend/serverless function URL once deployed.
+            // Example: const response = await fetch('https://your-vercel-app.vercel.app/api/spotify');
+            // For now, it will just use the default track set in index.html until you link the API.
+            
+            // const response = await fetch('/api/spotify');
+            // const data = await response.json();
+            // if (data && data.trackId) {
+            //     iframe.src = `https://open.spotify.com/embed/track/${data.trackId}?utm_source=generator&theme=0`;
+            // }
+        } catch (error) {
+            console.error('Failed to fetch Spotify status:', error);
+        }
+    }
+    
+    // Call on load and check every 2 minutes
+    updateSpotifyPlayer();
+    setInterval(updateSpotifyPlayer, 120000);
 });
