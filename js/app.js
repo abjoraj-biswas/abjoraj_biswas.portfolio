@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Call on load and check every 2 minutes
+    // Call on load and check every 10 seconds
     updateSpotifyPlayer();
-    setInterval(updateSpotifyPlayer, 120000);
+    setInterval(updateSpotifyPlayer, 10000);
 });
