@@ -517,25 +517,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!widget) return;
         
         try {
-            // NOTE: Replace this URL with your actual backend/serverless function URL once deployed.
-            // const response = await fetch('/api/spotify');
-            // const data = await response.json();
+            const response = await fetch('/api/now-playing');
+            if (!response.ok) return;
             
-            // if (data && data.isPlaying) {
-            //     document.getElementById('track-name').textContent = data.title;
-            //     document.getElementById('artist-name').textContent = data.artist;
-            //     document.getElementById('vinyl-cover').src = data.albumImageUrl;
-            //     widget.href = data.songUrl;
-            //     document.querySelector('.vinyl-record').classList.add('playing');
-            //     document.querySelector('.now-playing-text').innerHTML = '<i class="fas fa-music"></i> Now Playing';
-            // } else if (data && data.title) {
-            //     document.getElementById('track-name').textContent = data.title;
-            //     document.getElementById('artist-name').textContent = data.artist;
-            //     document.getElementById('vinyl-cover').src = data.albumImageUrl;
-            //     widget.href = data.songUrl;
-            //     document.querySelector('.vinyl-record').classList.remove('playing');
-            //     document.querySelector('.now-playing-text').innerHTML = '<i class="fas fa-history"></i> Recently Played';
-            // }
+            const data = await response.json();
+            
+            if (data && data.isPlaying) {
+                document.getElementById('track-name').textContent = data.title;
+                document.getElementById('artist-name').textContent = data.artist;
+                document.getElementById('vinyl-cover').src = data.albumImageUrl;
+                widget.href = data.songUrl;
+                document.querySelector('.vinyl-record').classList.add('playing');
+                document.querySelector('.now-playing-text').innerHTML = '<i class="fas fa-music"></i> Now Playing';
+            } else if (data && data.title) {
+                document.getElementById('track-name').textContent = data.title;
+                document.getElementById('artist-name').textContent = data.artist;
+                document.getElementById('vinyl-cover').src = data.albumImageUrl;
+                widget.href = data.songUrl;
+                document.querySelector('.vinyl-record').classList.remove('playing');
+                document.querySelector('.now-playing-text').innerHTML = '<i class="fas fa-history"></i> Recently Played';
+            }
         } catch (error) {
             console.error('Failed to fetch Spotify status:', error);
         }
