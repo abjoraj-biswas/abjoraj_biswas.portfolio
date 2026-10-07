@@ -87,11 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.classList.add('loaded');
                 document.body.style.overflow = '';
                 
-                // After the loader dissolves (1.5s), fade in the main content
+                // Fade in the main content almost immediately so there is no blank screen
                 setTimeout(() => {
                     document.body.classList.add('content-loaded');
-                    
-                    // Cleanup
+                }, 300);
+                
+                // Cleanup
+                setTimeout(() => {
                     cancelAnimationFrame(plaidFrame);
                     const loader = document.getElementById('plaid-loader');
                     if (loader) loader.remove();
