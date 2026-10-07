@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pCtx.beginPath();
                 pCtx.moveTo(px, py);
                 pCtx.lineTo(sx, sy);
-                pCtx.lineWidth = (1000 - star.z) / 100;
+                pCtx.lineWidth = (1000 - star.z) / 400; // Thinner lines
                 pCtx.strokeStyle = `hsl(${hue}, 100%, 70%)`;
                 pCtx.stroke();
             }
