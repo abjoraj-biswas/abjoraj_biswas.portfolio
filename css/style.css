@@ -771,6 +771,7 @@ footer {
     box-shadow: 0 0 10px rgba(0,0,0,0.8);
     overflow: hidden;
     animation: spin 4s linear infinite;
+    animation-play-state: paused;
 }
 
 .vinyl-record::after {
@@ -786,6 +787,10 @@ footer {
     );
     opacity: 0.5;
     pointer-events: none;
+}
+
+.vinyl-record.playing {
+    animation-play-state: running;
 }
 
 @keyframes spin {
