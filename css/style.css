@@ -724,12 +724,54 @@ section {
 
 /* Footer */
 footer {
-    text-align: center;
-    padding: 2rem;
+    padding: 3rem 2rem;
     color: var(--text-muted);
     font-size: 0.9rem;
     border-top: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.spotify-widget {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spotify-widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.listening-text {
+    font-family: var(--font-heading);
+    color: #1DB954; /* Spotify Green */
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-text {
+    text-align: center;
 }
 
 /* Custom Scrollbar */
