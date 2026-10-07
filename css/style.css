@@ -551,6 +551,43 @@ section {
     gap: 2rem;
 }
 
+/* GitHub Contributions */
+.github-contributions {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contributions-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+    font-family: 'Type Machine', monospace;
+    letter-spacing: 2px;
+}
+
+.contributions-wrapper {
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    backdrop-filter: blur(10px);
+}
+
+.contributions-wrapper img {
+    width: 100%;
+    min-width: 700px;
+    /* Invert colors to create a dark mode version of the chart */
+    filter: invert(1) hue-rotate(180deg) brightness(1.2);
+}
+
 .project-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
