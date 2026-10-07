@@ -1,107 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Plaid Loading Effect ---
-    const plaidCanvas = document.getElementById("plaid-canvas");
-    if (plaidCanvas) {
-        const pCtx = plaidCanvas.getContext("2d");
-        let pWidth = plaidCanvas.width = window.innerWidth;
-        let pHeight = plaidCanvas.height = window.innerHeight;
-        
-        const stars = [];
-        const numStars = 400;
-        let speed = 25; // Ludicrous speed
-        
-        for (let i = 0; i < numStars; i++) {
-            stars.push({
-                x: Math.random() * pWidth - pWidth / 2,
-                y: Math.random() * pHeight - pHeight / 2,
-                z: Math.random() * 1000,
-                pz: Math.random() * 1000
-            });
-        }
-        
-        document.body.style.overflow = 'hidden';
-        
-        let plaidFrame;
-        function drawPlaid() {
-            pCtx.fillStyle = "rgba(0, 0, 0, 0.2)"; // Fade effect for light trails
-            pCtx.fillRect(0, 0, pWidth, pHeight);
-            
-            const cx = pWidth / 2;
-            const cy = pHeight / 2;
-            
-            for (let i = 0; i < numStars; i++) {
-                const star = stars[i];
-                star.z -= speed;
-                
-                if (star.z < 1) {
-                    star.z = 1000;
-                    star.pz = 1000;
-                    star.x = Math.random() * pWidth - pWidth / 2;
-                    star.y = Math.random() * pHeight - pHeight / 2;
-                }
-                
-                const sx = (star.x / star.z) * 500 + cx;
-                const sy = (star.y / star.z) * 500 + cy;
-                
-                const px = (star.x / star.pz) * 500 + cx;
-                const py = (star.y / star.pz) * 500 + cy;
-                
-                star.pz = star.z;
-                
-                // Color ranging between blue and purple, turning white as speed drops
-                const dist = Math.sqrt(star.x*star.x + star.y*star.y);
-                let hue = (dist % 60) + 200; 
-                let sat = (speed / 25) * 100;
-                let light = 100 - ((speed / 25) * 30);
-                
-                pCtx.beginPath();
-                pCtx.moveTo(px, py);
-                pCtx.lineTo(sx, sy);
-                pCtx.lineWidth = (1000 - star.z) / 400; // Thinner lines
-                pCtx.strokeStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
-                pCtx.stroke();
-            }
-            
-            plaidFrame = requestAnimationFrame(drawPlaid);
-        }
-        drawPlaid();
-        
-        window.addEventListener("resize", () => {
-            pWidth = plaidCanvas.width = window.innerWidth;
-            pHeight = plaidCanvas.height = window.innerHeight;
-        });
-        
-        // Sequence: Run fast -> decelerate to 0 (turning white) -> dissolve -> show content
-        setTimeout(() => {
-            // Decelerate the speed over 1 second
-            let slowDownInterval = setInterval(() => {
-                speed -= 1;
-                if (speed <= 0) {
-                    speed = 0;
-                    clearInterval(slowDownInterval);
-                }
-            }, 40);
-
-            // Once speed is 0 (after 1s), start dissolving the loader to reveal the neural background
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-                document.body.style.overflow = '';
-                
-                // Fade in the main content almost immediately so there is no blank screen
-                setTimeout(() => {
-                    document.body.classList.add('content-loaded');
-                }, 300);
-                
-                // Cleanup
-                setTimeout(() => {
-                    cancelAnimationFrame(plaidFrame);
-                    const loader = document.getElementById('plaid-loader');
-                    if (loader) loader.remove();
-                }, 1500); 
-            }, 1000);
-        }, 1500); // 1.5 seconds of full speed
-    }
-    // ----------------------------
     // 1. Fetch GitHub Projects
     const GITHUB_USERNAME = 'abjoraj-biswas';
     const projectsContainer = document.getElementById('github-projects');
@@ -384,72 +281,187 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Dynamic Animated Background (Canvas Particles/Neural Net)
+    // 7. Dynamic Animated Background (Plaid -> Neural Net Transition)
     const canvas = document.getElementById('bg-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        let width, height, particles;
+        let width, height;
+        let mode = 'plaid';
+        let speed = 25;
+        let stars = [];
+        const numStars = 400;
+        let particles = [];
 
         function initCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            particles = [];
-            // Responsive amount of particles based on screen size
-            const numParticles = Math.floor(width * height / 15000);
-            for (let i = 0; i < numParticles; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    radius: Math.random() * 1.5 + 0.5
-                });
+            
+            if (mode === 'plaid') {
+                stars = [];
+                for (let i = 0; i < numStars; i++) {
+                    stars.push({
+                        x: Math.random() * width - width / 2,
+                        y: Math.random() * height - height / 2,
+                        z: Math.random() * 1000,
+                        pz: Math.random() * 1000
+                    });
+                }
+                document.body.style.overflow = 'hidden';
+            } else {
+                particles = [];
+                const numParticles = Math.floor(width * height / 15000);
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.4,
+                        vy: (Math.random() - 0.5) * 0.4,
+                        radius: Math.random() * 1.5 + 0.5
+                    });
+                }
             }
         }
 
         function drawCanvas() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+            if (mode === 'plaid') {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.2)"; // Fade effect for light trails
+                ctx.fillRect(0, 0, width, height);
+                
+                const cx = width / 2;
+                const cy = height / 2;
+                
+                for (let i = 0; i < numStars; i++) {
+                    const star = stars[i];
+                    star.z -= speed;
+                    
+                    if (star.z < 1) {
+                        star.z = 1000;
+                        star.pz = 1000;
+                        star.x = Math.random() * width - width / 2;
+                        star.y = Math.random() * height - height / 2;
+                    }
+                    
+                    const sx = (star.x / star.z) * 500 + cx;
+                    const sy = (star.y / star.z) * 500 + cy;
+                    
+                    const px = (star.x / star.pz) * 500 + cx;
+                    const py = (star.y / star.pz) * 500 + cy;
+                    
+                    star.pz = star.z;
+                    
+                    // Color ranging between blue and purple, turning white as speed drops
+                    const dist = Math.sqrt(star.x*star.x + star.y*star.y);
+                    let hue = (dist % 60) + 200; 
+                    let sat = (speed / 25) * 100;
+                    let light = 100 - ((speed / 25) * 30);
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(px, py);
+                    ctx.lineTo(sx, sy);
+                    ctx.lineWidth = (1000 - star.z) / 400; // Thinner lines
+                    ctx.strokeStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
+                    ctx.stroke();
+                }
+            } else {
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
 
-            for (let i = 0; i < particles.length; i++) {
-                let p = particles[i];
-                p.x += p.vx;
-                p.y += p.vy;
+                for (let i = 0; i < particles.length; i++) {
+                    let p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
 
-                // Wrap around edges seamlessly
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
 
-                // Draw particle node
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
 
-                // Connect close particles with lines (Neural net effect)
-                for (let j = i + 1; j < particles.length; j++) {
-                    let p2 = particles[j];
-                    let dx = p.x - p2.x;
-                    let dy = p.y - p2.y;
-                    let dist = dx * dx + dy * dy;
-                    if (dist < 12000) { // Connect if distance is short enough
-                        ctx.globalAlpha = 1 - (dist / 12000);
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                        ctx.globalAlpha = 1;
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let p2 = particles[j];
+                        let dx = p.x - p2.x;
+                        let dy = p.y - p2.y;
+                        let dist = dx * dx + dy * dy;
+                        if (dist < 12000) { 
+                            ctx.globalAlpha = 1 - (dist / 12000);
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                            ctx.globalAlpha = 1;
+                        }
                     }
                 }
             }
             requestAnimationFrame(drawCanvas);
         }
 
-        window.addEventListener('resize', initCanvas);
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            // Only re-init if we are fully in neural mode to avoid jumping
+            if (mode === 'neural') {
+                initCanvas();
+            }
+        });
         initCanvas();
         drawCanvas();
+        
+        // Sequence: Run fast -> decelerate to 0 (turning white) -> transform to neural link dots
+        setTimeout(() => {
+            let slowDownInterval = setInterval(() => {
+                speed -= 1;
+                if (speed <= 0) {
+                    speed = 0;
+                    clearInterval(slowDownInterval);
+                    
+                    // Transition to neural network mode
+                    mode = 'neural';
+                    
+                    // Convert stars exactly where they stopped into particles!
+                    particles = [];
+                    const cx = width / 2;
+                    const cy = height / 2;
+                    for (let i = 0; i < stars.length; i++) {
+                        const star = stars[i];
+                        const sx = (star.x / star.z) * 500 + cx;
+                        const sy = (star.y / star.z) * 500 + cy;
+                        
+                        if (sx >= 0 && sx <= width && sy >= 0 && sy <= height) {
+                            particles.push({
+                                x: sx,
+                                y: sy,
+                                vx: (Math.random() - 0.5) * 0.4,
+                                vy: (Math.random() - 0.5) * 0.4,
+                                radius: Math.random() * 1.5 + 0.5
+                            });
+                        }
+                    }
+                    
+                    // Ensure we have enough particles for the network
+                    const numParticles = Math.floor(width * height / 15000);
+                    while (particles.length < numParticles) {
+                         particles.push({
+                            x: Math.random() * width,
+                            y: Math.random() * height,
+                            vx: (Math.random() - 0.5) * 0.4,
+                            vy: (Math.random() - 0.5) * 0.4,
+                            radius: Math.random() * 1.5 + 0.5
+                        });
+                    }
+                    
+                    // Fade in the main content seamlessly
+                    document.body.style.overflow = '';
+                    setTimeout(() => {
+                        document.body.classList.add('content-loaded');
+                    }, 100);
+                }
+            }, 40);
+        }, 1500);
     }
     // 8. Adjust timeline central line height
     function updateTimelineLine() {
