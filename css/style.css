@@ -117,6 +117,7 @@ a, button, input, textarea, .project-card, .btn {
     width: 100%;
     padding: 1.5rem 0;
     z-index: 100;
+    background: rgba(10, 15, 30, 0.7); /* Fallback for browsers that don't support backdrop-filter well */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
@@ -1330,6 +1331,13 @@ body.cursor-ready #cursor-ring {
 
     .greeting {
         font-size: 0.85rem;
+    }
+
+    .hero-image-bg {
+        width: 100%;
+        opacity: 0.15;
+        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 50%);
+        mask-image: linear-gradient(to top, transparent 0%, black 50%);
     }
 
     /* About Section */
