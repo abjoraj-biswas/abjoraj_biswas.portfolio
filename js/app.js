@@ -291,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let stars = [];
         const numStars = 400;
         let particles = [];
+        let neuralLineOpacity = 0; // Controls the slow fade-in of lines
 
         function initCanvas() {
             width = canvas.width = window.innerWidth;
@@ -366,6 +367,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.clearRect(0, 0, width, height);
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+                
+                // Slowly increase line opacity up to 0.3 for a less prominent, subtle look
+                if (neuralLineOpacity < 0.3) {
+                    neuralLineOpacity += 0.002;
+                }
 
                 for (let i = 0; i < particles.length; i++) {
                     let p = particles[i];
@@ -387,7 +393,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         let dy = p.y - p2.y;
                         let dist = dx * dx + dy * dy;
                         if (dist < 12000) { 
-                            ctx.globalAlpha = 1 - (dist / 12000);
+                            // Calculate base opacity based on distance, then scale by the slowly fading in global opacity limit (max 0.25 for less prominence)
+                            ctx.globalAlpha = (1 - (dist / 12000)) * neuralLineOpacity;
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(p2.x, p2.y);
