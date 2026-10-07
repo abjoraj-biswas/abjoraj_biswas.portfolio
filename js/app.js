@@ -513,18 +513,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 9. Spotify Recently Played Integration
     async function updateSpotifyPlayer() {
-        const iframe = document.getElementById('spotify-iframe');
-        if (!iframe) return;
+        const widget = document.getElementById('vinyl-widget');
+        if (!widget) return;
         
         try {
             // NOTE: Replace this URL with your actual backend/serverless function URL once deployed.
-            // Example: const response = await fetch('https://your-vercel-app.vercel.app/api/spotify');
-            // For now, it will just use the default track set in index.html until you link the API.
-            
             // const response = await fetch('/api/spotify');
             // const data = await response.json();
-            // if (data && data.trackId) {
-            //     iframe.src = `https://open.spotify.com/embed/track/${data.trackId}?utm_source=generator&theme=0`;
+            
+            // if (data && data.isPlaying) {
+            //     document.getElementById('track-name').textContent = data.title;
+            //     document.getElementById('artist-name').textContent = data.artist;
+            //     document.getElementById('vinyl-cover').src = data.albumImageUrl;
+            //     widget.href = data.songUrl;
+            //     document.querySelector('.vinyl-record').classList.add('playing');
+            //     document.querySelector('.now-playing-text').innerHTML = '<i class="fas fa-music"></i> Now Playing';
+            // } else if (data && data.title) {
+            //     document.getElementById('track-name').textContent = data.title;
+            //     document.getElementById('artist-name').textContent = data.artist;
+            //     document.getElementById('vinyl-cover').src = data.albumImageUrl;
+            //     widget.href = data.songUrl;
+            //     document.querySelector('.vinyl-record').classList.remove('playing');
+            //     document.querySelector('.now-playing-text').innerHTML = '<i class="fas fa-history"></i> Recently Played';
             // }
         } catch (error) {
             console.error('Failed to fetch Spotify status:', error);

@@ -173,17 +173,21 @@
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="spotify-widget">
-                <p class="listening-text"><i class="fab fa-spotify"></i> Recently Played</p>
-                <!-- This iframe src will be dynamically updated by JS. It has a placeholder song for now. -->
-                <iframe id="spotify-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT?utm_source=generator&theme=0" width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-            <div class="footer-text">
-                <p>Designed & Built by Abjoraj Biswas</p>
-            </div>
-        </div>
+        <p>Designed & Built by Abjoraj Biswas</p>
     </footer>
+
+    <!-- Floating Vinyl Player Widget -->
+    <a href="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT" target="_blank" class="vinyl-widget" id="vinyl-widget">
+        <div class="vinyl-record playing">
+            <img id="vinyl-cover" src="https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96" alt="Album Art">
+            <div class="vinyl-hole"></div>
+        </div>
+        <div class="vinyl-info">
+            <p class="now-playing-text"><i class="fas fa-music"></i> Now Playing</p>
+            <p class="song-title" id="track-name">Never Gonna Give You Up</p>
+            <p class="artist-name" id="artist-name">Rick Astley</p>
+        </div>
+    </a>
 
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
     <script src="js/app.js"></script>

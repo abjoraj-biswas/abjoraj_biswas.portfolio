@@ -724,54 +724,132 @@ section {
 
 /* Footer */
 footer {
-    padding: 3rem 2rem;
+    text-align: center;
+    padding: 2rem;
     color: var(--text-muted);
     font-size: 0.9rem;
     border-top: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(10px);
 }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
+/* Floating Vinyl Widget */
+.vinyl-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 8px 20px 8px 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.3s ease;
+    cursor: none; /* Inherits custom cursor */
+}
+
+.vinyl-widget:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+.vinyl-record {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #111;
+    border: 2px solid #333;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+
+.vinyl-record::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+        #111,
+        #111 2px,
+        #222 3px,
+        #111 4px
+    );
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.vinyl-record.playing {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+#vinyl-cover {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 2;
+}
+
+.vinyl-hole {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #000;
+    border-radius: 50%;
+    z-index: 3;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.vinyl-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    max-width: 140px;
+    justify-content: center;
 }
 
-.spotify-widget {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 1.5rem;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.spotify-widget:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-.listening-text {
-    font-family: var(--font-heading);
-    color: #1DB954; /* Spotify Green */
-    font-weight: 600;
-    font-size: 1rem;
+.now-playing-text {
+    font-size: 0.65rem;
+    color: #1DB954;
+    font-weight: 700;
+    text-transform: uppercase;
     letter-spacing: 1px;
+    margin-bottom: 2px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 5px;
 }
 
-.footer-text {
-    text-align: center;
+.song-title {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.artist-name {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
 }
 
 /* Custom Scrollbar */
