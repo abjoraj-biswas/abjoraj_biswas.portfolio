@@ -465,6 +465,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.style.overflow = '';
                     setTimeout(() => {
                         document.body.classList.add('content-loaded');
+                        setTimeout(() => {
+                            document.body.classList.add('cursor-ready');
+                        }, 1500);
                     }, 100);
                 }
             }, 40);
