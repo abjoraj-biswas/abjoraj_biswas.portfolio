@@ -1,4 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Plaid Loading Effect ---
+    const plaidCanvas = document.getElementById("plaid-canvas");
+    if (plaidCanvas) {
+        const pCtx = plaidCanvas.getContext("2d");
+        let pWidth = plaidCanvas.width = window.innerWidth;
+        let pHeight = plaidCanvas.height = window.innerHeight;
+        
+        const stars = [];
+        const numStars = 400;
+        const speed = 25; // Ludicrous speed
+        
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * pWidth - pWidth / 2,
+                y: Math.random() * pHeight - pHeight / 2,
+                z: Math.random() * 1000,
+                pz: Math.random() * 1000
+            });
+        }
+        
+        document.body.style.overflow = 'hidden';
+        
+        let plaidFrame;
+        function drawPlaid() {
+            pCtx.fillStyle = "rgba(0, 0, 0, 0.2)"; // Fade effect for light trails
+            pCtx.fillRect(0, 0, pWidth, pHeight);
+            
+            const cx = pWidth / 2;
+            const cy = pHeight / 2;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = stars[i];
+                star.z -= speed;
+                
+                if (star.z < 1) {
+                    star.z = 1000;
+                    star.pz = 1000;
+                    star.x = Math.random() * pWidth - pWidth / 2;
+                    star.y = Math.random() * pHeight - pHeight / 2;
+                }
+                
+                const sx = (star.x / star.z) * 500 + cx;
+                const sy = (star.y / star.z) * 500 + cy;
+                
+                const px = (star.x / star.pz) * 500 + cx;
+                const py = (star.y / star.pz) * 500 + cy;
+                
+                star.pz = star.z;
+                
+                // Color ranging between blue and purple
+                const dist = Math.sqrt(star.x*star.x + star.y*star.y);
+                let hue = (dist % 60) + 200; 
+                
+                pCtx.beginPath();
+                pCtx.moveTo(px, py);
+                pCtx.lineTo(sx, sy);
+                pCtx.lineWidth = (1000 - star.z) / 100;
+                pCtx.strokeStyle = `hsl(${hue}, 100%, 70%)`;
+                pCtx.stroke();
+            }
+            
+            plaidFrame = requestAnimationFrame(drawPlaid);
+        }
+        drawPlaid();
+        
+        window.addEventListener("resize", () => {
+            pWidth = plaidCanvas.width = window.innerWidth;
+            pHeight = plaidCanvas.height = window.innerHeight;
+        });
+        
+        // Remove loader after 2.5 seconds
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                cancelAnimationFrame(plaidFrame);
+                const loader = document.getElementById('plaid-loader');
+                if (loader) loader.remove();
+            }, 1500); // wait for CSS fade out
+        }, 2500);
+    }
+    // ----------------------------
     // 1. Fetch GitHub Projects
     const GITHUB_USERNAME = 'abjoraj-biswas';
     const projectsContainer = document.getElementById('github-projects');
