@@ -381,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     y: Math.random() * height,
                     vx: (Math.random() - 0.5) * 0.4,
                     vy: (Math.random() - 0.5) * 0.4,
-                    radius: 3
+                    radius: Math.random() * 0.8 + 0.2
                 });
             }
         }
