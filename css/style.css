@@ -660,8 +660,6 @@ section {
     justify-content: space-between;
     height: 100%;
     backdrop-filter: blur(10px);
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
 }
 
 .project-card:hover {
