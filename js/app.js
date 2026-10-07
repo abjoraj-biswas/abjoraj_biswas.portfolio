@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const stars = [];
         const numStars = 400;
-        const speed = 25; // Ludicrous speed
+        let speed = 25; // Ludicrous speed
         
         for (let i = 0; i < numStars; i++) {
             stars.push({
@@ -69,16 +69,30 @@ document.addEventListener('DOMContentLoaded', () => {
             pHeight = plaidCanvas.height = window.innerHeight;
         });
         
-        // Remove loader after 2.5 seconds
+        // Sequence: Run fast -> decelerate to 0 -> dissolve
         setTimeout(() => {
-            document.body.classList.add('loaded');
-            document.body.style.overflow = '';
+            // Decelerate the speed over 1 second
+            let slowDownInterval = setInterval(() => {
+                speed -= 1;
+                if (speed <= 0) {
+                    speed = 0;
+                    clearInterval(slowDownInterval);
+                }
+            }, 40);
+
+            // Once speed is 0 (after 1s), start dissolving to the home page
             setTimeout(() => {
-                cancelAnimationFrame(plaidFrame);
-                const loader = document.getElementById('plaid-loader');
-                if (loader) loader.remove();
-            }, 1500); // wait for CSS fade out
-        }, 2500);
+                document.body.classList.add('loaded');
+                document.body.style.overflow = '';
+                
+                // Remove DOM elements after transition finishes
+                setTimeout(() => {
+                    cancelAnimationFrame(plaidFrame);
+                    const loader = document.getElementById('plaid-loader');
+                    if (loader) loader.remove();
+                }, 1500); 
+            }, 1000);
+        }, 1500); // 1.5 seconds of full speed
     }
     // ----------------------------
     // 1. Fetch GitHub Projects
